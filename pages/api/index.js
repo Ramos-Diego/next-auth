@@ -7,7 +7,7 @@ const secret = process.env.JWT_SECRET
 export default async (req, res) => {
   const {
     method,
-    body: { _id, uid },
+    body: { _id },
   } = req
   const token = await jwt.getToken({ req, secret })
 
@@ -29,7 +29,7 @@ export default async (req, res) => {
         try {
           // Optional filter to prevent any JavaScript injection
           // Only accept letters a-z, case insensitive
-          const filteredWord = req.body.word.replace(/[^a-z]/gi,'')
+          const filteredWord = req.body.word.replace(/[^a-z]/gi, '')
           const word = await Word.create({
             word: filteredWord,
             // The Word model requires these two fields
@@ -44,12 +44,16 @@ export default async (req, res) => {
 
       case 'DELETE' /* Delete a word */:
         try {
-          // TODO: Check that only author can delete
-          const { deletedCount } = await Word.deleteOne({ _id })
-          if (!deletedCount) {
-            return res.status(400).json({ deletedWord: false })
+          const toDelete = await Word.findById(_id)
+          if (toDelete.uid === token.uid) {
+            const { deletedCount } = await Word.deleteOne({ _id })
+            if (!deletedCount) {
+              return res.status(400).json({ deletedWord: false })
+            }
+            res.status(200).json({ deletedWord: true })
+          } else {
+            res.status(401).json({ msg: `You're not authorized` })
           }
-          res.status(200).json({ deletedWord: true })
         } catch (error) {
           res.status(400).json({ success: false })
         }

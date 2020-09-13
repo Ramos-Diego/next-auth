@@ -43,7 +43,7 @@ export default function Page({ words }) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({...data, uid: session.user.uid }),
+      body: JSON.stringify(data),
     })
       .then((response) => response.json())
       .then(({ saved }) => (saved ? router.reload() : setApiError(true)))
@@ -59,7 +59,7 @@ export default function Page({ words }) {
       },
       // Attach uid to the req.body to ensure user
       // can't delete other user's words
-      body: JSON.stringify({ _id, uid: session.user.uid }),
+      body: JSON.stringify({ _id }),
     })
       .then((response) => response.json())
       .then(({ deletedWord }) =>
