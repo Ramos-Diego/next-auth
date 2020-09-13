@@ -1,0 +1,7 @@
+DELETE http://localhost:3000/api/ HTTP/1.1
+content-type: application/json
+
+{
+    "word": "random",
+    "uid": "118301887261112809812"
+}
