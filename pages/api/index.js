@@ -44,16 +44,13 @@ export default async (req, res) => {
 
       case 'DELETE' /* Delete a word */:
         try {
-          const toDelete = await Word.findById(_id)
-          if (toDelete.uid === token.uid) {
-            const { deletedCount } = await Word.deleteOne({ _id })
-            if (!deletedCount) {
-              return res.status(400).json({ deletedWord: false })
-            }
-            res.status(200).json({ deletedWord: true })
-          } else {
-            res.status(401).json({ msg: `You're not authorized` })
+          // Query by the id passed in the body and the token uid
+          // This ensures only author can delete entries
+          const { deletedCount } = await Word.deleteOne({ _id, uid: token.uid })
+          if (!deletedCount) {
+            return res.status(400).json({ deletedWord: false })
           }
+          res.status(200).json({ deletedWord: true })
         } catch (error) {
           res.status(400).json({ success: false })
         }

@@ -14,17 +14,10 @@ import { useState } from 'react'
 // [
 //   {
 //     "_id": "5f5e2fc031d84402b68f6d12",
-//     "word": "Pop",
+//     "word": "Flowers",
 //     "author": "Ramona",
 //     The uid is obtained from the profile.id provided by oauth
 //     The profile object changes based on the provider
-//     "uid": "123",
-//     "__v": 0
-//   },
-//   {
-//     "_id": "5f5e2fc631d84402b68f6d13",
-//     "word": "Woo",
-//     "author": "Ramona",
 //     "uid": "123",
 //     "__v": 0
 //   }
