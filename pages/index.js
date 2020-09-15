@@ -103,12 +103,14 @@ export default function Page({ words }) {
 }
 
 export const getServerSideProps = async (context) => {
-  await dbConnect()
   const session = await getSession(context)
 
   if (session) {
+    await dbConnect()
     // Get all the words from an uid
-    const data = await Word.find({ /*uid: session.user.uid*/ })
+    const data = await Word.find({
+      /*uid: session.user.uid*/
+    })
       // Return JavaScript object, not Mongoose document
       .lean()
       // Sort by _id, which increments by one on every entry
@@ -116,13 +118,11 @@ export const getServerSideProps = async (context) => {
       // .select removes the __v from the output
       .select('-__v')
 
-    const words = data.map((word) => {
-      return {
-        ...word,
-        // _id is an object created by mongoose which can't be serialized. It must be converted to a string
-        _id: word._id.toString(),
-      }
-    })
+    const words = data.map((word) => ({
+      ...word,
+      // _id is an object created by mongoose which can't be serialized. It must be converted to a string
+      _id: word._id.toString(),
+    }))
 
     return { props: { words } }
   } else {
