@@ -2,19 +2,17 @@ Next-Auth.js significantlly simplifies using OAuth. It is trully plug and play.
 
 This project servers as a starting point/guide to implement OAuth authentication and protected routes with Next-Auth.js and Next.js.  
 
-## Getting Started
+## Useful links
 
-First, run the development server:
+[Creating OAuth app with Github](https://docs.github.com/en/developers/apps/creating-an-oauth-app)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+[Google OAuth](https://developers.google.com/identity/protocols/oauth2)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[Next-Auth.js Example](https://next-auth.js.org/getting-started/example)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Your Homepage URL will be: http://localhost:3000/
+Your Authorization callback URL will be : http://localhost:3000/api/auth/
+This callback URL is setup by Next-Auth automatically.
 
 ## Required environment variables
 
@@ -27,3 +25,15 @@ NEXTAUTH_URL=http://localhost:3000
 JWT_SECRET=
 MONGODB_URI=
 ```
+
+## Run
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
