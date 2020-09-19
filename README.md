@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Next-Auth.js significantlly simplifies using OAuth. It is trully plug and play.
+
+This project servers as a starting point/guide to implement OAuth authentication and protected routes with Next-Auth.js and Next.js.  
 
 ## Getting Started
 
